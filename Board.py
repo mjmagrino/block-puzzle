@@ -4,7 +4,7 @@ class Board:
 
         matrix = []
         
-        """Hi there"""
+     
         for i in range(int(rows)):
             other = [0] * cols
             matrix.append(other)
