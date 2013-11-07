@@ -21,9 +21,25 @@ class Board:
 
            
     def AddBlock(self,width,height,ID,row_pos,col_pos):
-        
-        self.tray[row_pos][col_pos] = ID
+           """
+        necessary modifications:
+        AddBlock() needs to take as input a file of type Block
+        width and height need to be taken into account when propigating
+        the Block across the positions that it takes up
+        """
 
+        #checks to see if block can be added. borders accounted for?
+        for i in range(width):
+            for j in range(height):
+                if int (self.tray[i+row_pos][j+col_pos]) !=0:
+                    raise Exception('Block cannot be added at: ', i+row_pos,j+col_pos)
+
+        #adds the block
+        for i in range(width):
+            for j in range(height):
+                self.tray[i+row_pos][j+col_pos] = ID
+
+        
 
     def PossibleMoves(self):
          '''every block may have possible moves
