@@ -24,8 +24,6 @@ class Board:
             """
             necessary modifications:
             AddBlock() needs to take as input a file of type Block
-            width and height need to be taken into account when propigating
-            the Block across the positions that it takes up
             """
 
             """ Are we going to have ID's?
@@ -34,6 +32,11 @@ class Board:
             I might be confused. I think I remember him saying
             making them global in the beginning would be fine.
             """
+           
+            """
+            IDs are necessary for adding/deleting/moving blocks but should not be used when calculating the path
+            """
+
 
         #checks to see if block can be added. borders accounted for?
         for i in range(width):
