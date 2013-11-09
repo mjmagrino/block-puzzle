@@ -78,7 +78,7 @@ class Board:
         if canMoveRight(block):
             moves.append("Right")
                 
-        return         
+        return moves      
 
     def canMoveLeft(self,block): 
 
