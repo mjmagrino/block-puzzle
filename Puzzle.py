@@ -2,6 +2,28 @@ import sys
 from Tray import *
 
 
+hash_table = {}
+
+def HashConfig(blocks):
+    ints =[]
+    key = ""
+    for block in blocks:
+	num=""
+	for i in range(len(block)):
+	    num+= str(block[i])
+	ints.append(int(num))	
+    ints.sort()
+    
+    for int in ints:
+	key += str(int)
+    
+    hash_table[key]= 'list of original configurations '+\
+                        'of blocks, before being sorted'
+
+
+
+
+
 file1 = sys.argv[1]
 file2 = sys.argv[2]
 
@@ -27,11 +49,11 @@ blocks=[]
 
 
 for i in range(len(raw_blocks)):
-    block_attr=[]
+    shit=[]
     for j in range(len(raw_blocks[1])):
         if (raw_blocks[i][j] != ' '):
-	    block_attr.append(raw_blocks[i][j])
-    b = Block(block_attr[0],block_attr[1],block_attr[2],block_attr[3])	    
+	    shit.append(raw_blocks[i][j])
+    b = Block(shit[0],shit[1],shit[2],shit[3])	    
     blocks.append(b)
 
 file1.close()
