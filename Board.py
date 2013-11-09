@@ -51,13 +51,19 @@ class Board:
 
         
 
-    def PossibleMoves(self):
+    def PossibleMoves(self,blocklist):
          '''every block may have possible moves
-          so in order to make this list, go through each block
-           on the board and find possible moves for it
+        so in order to make this list, go through each block
+        on the board and find possible moves for it
 
-            sum of moves for each block
-            '''
+        sum of moves for each block
+        '''
+        allmoves={}
+        for i in range(len(blocklist)):
+            allmoves[blocklist[i]] = PossibleBlockMoves(blocklist[i])
+         return allmoves
+         
+
          
     def PossibleBlockMoves(self,block):
         '''is there space above it, right, left, below? '''
