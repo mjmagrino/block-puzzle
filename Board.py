@@ -21,38 +21,24 @@ class Board:
 
            
     def AddBlock(self,width,height,ID,row_pos,col_pos):
-    """
-            necessary modifications:
-            AddBlock() needs to take as input a file of type Block
-    """
-
-            """ Are we going to have ID's?
-            He was saying that they'll screw things up,
-            so how do we know what blocks occupy what spaces?
-            I might be confused. I think I remember him saying
-            making them global in the beginning would be fine.
-            """
-           
-            """
-            IDs are necessary for adding/deleting/moving blocks but should not be used when calculating the path
-            """
+            
 
 
         #checks to see if block can be added. borders accounted for?
         for i in range(width):
-            for j in range(height):
-                if int (self.tray[i+row_pos][j+col_pos]) !=0:
-                    raise Exception('Block cannot be added at: ', i+row_pos,j+col_pos)
+	    for j in range(height):
+		if int (self.tray[i+row_pos][j+col_pos]) !=0:
+		    raise Exception('Block cannot be added at: ', i+row_pos,j+col_pos)
 
         #adds the block
         for i in range(width):
             for j in range(height):
                 self.tray[i+row_pos][j+col_pos] = ID
 
-    def DeleteBlock()    
+        
 
     def PossibleMoves(self,blocklist):
-         '''every block may have possible moves
+        '''every block may have possible moves
         so in order to make this list, go through each block
         on the board and find possible moves for it
 
@@ -155,7 +141,7 @@ class Block:
 
     def isequal(other):
   
-        return (self._width == other._width) && (self._height == other._height)
+        return (self._width == other._width) and (self._height == other._height)
 
     def getSize(self):
         return self.getHeight(),self.getWidth()
@@ -168,4 +154,11 @@ class Block:
 
     def getWidth(self):
         return self._width
+    '''def __str__(self):
+	return ' Width: '+ str(self._width ) +\
+		' Height: '+str(self._height) +\
+		' Row_pos: '+str(self._row_pos) +\
+		' Col_pos: '+str(self._col_pos)+'\n'
 
+    def __repr__(self):
+	return self.__str__()'''
