@@ -21,10 +21,10 @@ class Board:
 
            
     def AddBlock(self,width,height,ID,row_pos,col_pos):
-            """
+    """
             necessary modifications:
             AddBlock() needs to take as input a file of type Block
-            """
+    """
 
             """ Are we going to have ID's?
             He was saying that they'll screw things up,
@@ -49,7 +49,7 @@ class Board:
             for j in range(height):
                 self.tray[i+row_pos][j+col_pos] = ID
 
-        
+    def DeleteBlock()    
 
     def PossibleMoves(self,blocklist):
          '''every block may have possible moves
