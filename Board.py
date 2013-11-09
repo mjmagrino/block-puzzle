@@ -61,11 +61,20 @@ class Board:
          
     def PossibleBlockMoves(self,block):
         '''is there space above it, right, left, below? '''
-         
-                   
-    """Need to figure out what we will use to store possible moves for a block.
-    'moves' is a non-existant list right now"""
-    def canMoveLeft(self,block):
+
+        moves=[]
+        if canMoveLeft(block):
+            moves.append("Left")
+        if canMoveUp(block):
+            moves.apend("Up")
+        if canMoveDown(block):
+            moves.append("Down")
+        if canMoveRight(block):
+            moves.append("Right")
+                
+        return         
+
+    def canMoveLeft(self,block): 
 
         pos = block.getPos()
         i = pos[0]
@@ -73,13 +82,14 @@ class Board:
         h= block.getHeight()
         w = block.getWidth()
         count = 0
-        for a in range(h):
+        for  a in range(h):
             if int(matrix[i+a][j-1]) == 0:
                 count +=1
         if count == h:
-            moves.append('Left')
+            return True
+        return False
         
-    def canMoveRight(self,block)
+    def canMoveRight(self,block):
 
         pos = block.getPos()
         i = pos[0]
@@ -91,8 +101,8 @@ class Board:
             if int(matrix[i+a][j+1]) == 0:
                 count +=1
         if count == h:
-            moves.append('Right')
-
+            return True
+        return False
     def canMoveUp(self,block):
 
         pos = block.getPos()
@@ -105,7 +115,9 @@ class Board:
             if int(matrix[i-1][a+j]) == 0:
                 count +=1
         if count == h:
-            moves.append('Up')
+            return True
+        return False
+
     def canMoveDown(self,block):
         pos = block.getPos()
         i = pos[0]
@@ -117,8 +129,9 @@ class Board:
             if int(matrix[i+1][a+j]) == 0:
                 count +=1
         if count == h:
-            moves.append('Down')
-        return len(moves)
+            return True
+        return False 
+
         
 class Block:
 
