@@ -61,7 +61,7 @@ class Board:
         allmoves={}
         for i in range(len(blocklist)):
             allmoves[blocklist[i]] = PossibleBlockMoves(blocklist[i])
-         return allmoves
+        return allmoves
          
 
          
