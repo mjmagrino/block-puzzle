@@ -20,10 +20,13 @@ class Board:
         return ''
 
            
-    def AddBlock(self,width,height,ID,row_pos,col_pos):
-            
-
-
+    def AddBlock(self,block,ID):
+        width=block.getWidth
+        height=block.getHeight
+        #ID=block.getID
+        row_pos=block.getPos[0]
+        col_pos=block.getPos[1]
+     
         #checks to see if block can be added. borders accounted for?
         for i in range(width):
 	    for j in range(height):
@@ -34,9 +37,15 @@ class Board:
         for i in range(width):
             for j in range(height):
                 self.tray[i+row_pos][j+col_pos] = ID
-
-        
-
+    
+    def DeleteBlock(self, block, ID):
+          for i in range(width):
+              for j in range(height):
+                  if int(self.tray[i+row_pos][j+col_pos]==ID
+                       self.tray[i+row_pos][j+col_pos]= 0
+    def MoveBlock(self,block,ID):
+          DeleteBlock(block, ID)
+          
     def PossibleMoves(self,blocklist):
         '''every block may have possible moves
         so in order to make this list, go through each block
