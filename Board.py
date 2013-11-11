@@ -50,12 +50,11 @@ class Board:
                 if int(self.tray[i+row_pos][j+col_pos]==ID:
                     self.tray[i+row_pos][j+col_pos]= 0
     
+  
      def MoveBlock(self,block,ID,new_row,new_col):
           new_spot = Block(block.getWidth, block.getHeight, new_row, new_col)
           DeleteBlock(block, ID)
-          
-          AddBlock(
-                     
+          AddBlock(new_spot, ID)
 
           
     def PossibleMoves(self,blocklist):
