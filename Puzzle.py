@@ -49,20 +49,24 @@ blocks=[]
 
 
 for i in range(len(raw_blocks)):
-    shit=[]
+    tmp=[]
     for j in range(len(raw_blocks[1])):
         if (raw_blocks[i][j] != ' '):
-	    shit.append(raw_blocks[i][j])
-    b = Block(shit[0],shit[1],shit[2],shit[3])	    
+	    tmp.append(raw_blocks[i][j])
+    b = Block(tmp[0],tmp[1],tmp[2],tmp[3])	    
     blocks.append(b)
 
 file1.close()
 
-print(b.getHeight())
+#print(b.getHeight())
 
 for x in range(len(blocks)):
     board.AddBlock(blocks[x])
 print(board)
+
+#the following tests the RemoveBlock() method by removing the first block added to the board
+#board.RemoveBlock(blocks[0])
+#print(board)
 
 
 
