@@ -34,7 +34,7 @@ class Board:
         for i in range(width):
             for j in range(height):
                 if int (self.tray[j+row_pos][i+col_pos]) !=0:
-                    raise Exception('Block cannot be added at: ', i+row_pos,j+col_pos)
+                    raise Exception('Block ' +str(ID) +' cannot be added at: ', i+row_pos,j+col_pos)
 
         #adds the block
         for i in range(width):
