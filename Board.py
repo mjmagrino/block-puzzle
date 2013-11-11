@@ -19,7 +19,6 @@ class Board:
             print(row)
         return ''
 
-           
     def AddBlock(self,block,ID):
         width=block.getWidth
         height=block.getHeight
@@ -29,9 +28,9 @@ class Board:
      
         #checks to see if block can be added. borders accounted for?
         for i in range(width):
-	    for j in range(height):
-		if int (self.tray[i+row_pos][j+col_pos]) !=0:
-		    raise Exception('Block cannot be added at: ', i+row_pos,j+col_pos)
+            for j in range(height):
+                if int (self.tray[i+row_pos][j+col_pos]) !=0:
+                    raise Exception('Block cannot be added at: ', i+row_pos,j+col_pos)
 
         #adds the block
         for i in range(width):
@@ -49,18 +48,17 @@ class Board:
           
         for i in range(width):
             for j in range(height):
-                if int(self.tray[i+row_pos][j+col_pos]==ID:
+                if int(self.tray[i+row_pos][j+col_pos]==ID):
                     self.tray[i+row_pos][j+col_pos]= 0
     
   
-     def MoveBlock(self,block,ID,new_row,new_col):
-          #this is really stupid and will wind up with a ton of extraneous memory usage
-          #it would be better to change the position information in the block rather than create
-          #a ton of new Block objects.
-          new_spot = Block(block.getWidth, block.getHeight, new_row, new_col)
-          DeleteBlock(block, ID)
-          AddBlock(new_spot, ID)
-
+    def MoveBlock(self,block,ID,new_row,new_col):
+         #this is really stupid and will wind up with a ton of extraneous memory usage
+         #it would be better to change the position information in the block rather than create
+         #a ton of new Block objects.
+         new_spot = Block(block.getWidth, block.getHeight, new_row, new_col)
+         DeleteBlock(block, ID)
+         AddBlock(new_spot, ID)
           
     def PossibleMoves(self,blocklist):
         '''every block may have possible moves
