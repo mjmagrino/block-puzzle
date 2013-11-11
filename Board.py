@@ -52,6 +52,7 @@ class Board:
     
   
      def MoveBlock(self,block,ID,new_row,new_col):
+          #this is really stupid and will wind up with a ton of extraneous memory usage
           new_spot = Block(block.getWidth, block.getHeight, new_row, new_col)
           DeleteBlock(block, ID)
           AddBlock(new_spot, ID)
