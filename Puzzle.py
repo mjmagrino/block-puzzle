@@ -29,8 +29,10 @@ file2 = sys.argv[2]
 
 
 file1 = open(file1,'r')
+file2 = open(file2, 'r')
 
 lines = file1.readlines()
+goal = file2.readlines()
 
 tray_dimensions = lines[0]
 
@@ -57,6 +59,7 @@ for i in range(len(raw_blocks)):
     blocks.append(b)
 
 file1.close()
+file2.close()
 
 #print(b.getHeight())
 
