@@ -18,13 +18,13 @@ class Board:
         for row in tmp1:
             print(row)
         return ''
-
+          
     def AddBlock(self,block,ID):
-        width=block.getWidth
-        height=block.getHeight
+        width=int(block.getWidth())
+        height=int(stryblock.getHeight())
         #ID=block.getID
-        row_pos=block.getPos[0]
-        col_pos=block.getPos[1]
+        row_pos=int(block.getPos()[0])
+        col_pos=int(block.getPos()[1])
      
         #checks to see if block can be added. borders accounted for?
         for i in range(width):
@@ -40,11 +40,11 @@ class Board:
     def DeleteBlock(self, block, ID):
         #this doesn't really 'delete' the Block object, it just removes it from the tray
         #should be renamed to 'RemoveBlock()'...
-        width=block.getWidth
-        height=block.getHeight
+        width=int(block.getWidth())
+        height=int(block.getHeight())
         #ID=block.getID
-        row_pos=block.getPos[0]
-        col_pos=block.getPos[1]
+        row_pos=int(block.getPos()[0])
+        col_pos=int(block.getPos()[1])
           
         for i in range(width):
             for j in range(height):
@@ -52,14 +52,28 @@ class Board:
                     self.tray[i+row_pos][j+col_pos]= 0
     
   
-    def MoveBlock(self,block,ID,new_row,new_col):
+ '''   def MoveBlock(self,block,ID,direction):
          #this is really stupid and will wind up with a ton of extraneous memory usage
          #it would be better to change the position information in the block rather than create
          #a ton of new Block objects.
-         new_spot = Block(block.getWidth, block.getHeight, new_row, new_col)
-         DeleteBlock(block, ID)
-         AddBlock(new_spot, ID)
-          
+       
+         # take direction as arg...must handle 4 cases
+       	if direction == 'right':
+        	block.setPos(block.getPos()[0],block.getPos()[1]+1)
+       	elif direction == 'left':
+       		block.setPos(block.getPos()[0],block.getPos()[1]-1)
+       	elif direction == 'up':
+        	block.setPos(block.getPos()[0]-1,block.getPos()[1])
+        elif direction == 'down':
+        	block.setPos(block.getPos()[0]+1,block.getPos()[1])
+        else:
+        	raise Exception("MoveBlock failed!")
+ '''
+       
+    
+     
+         
+    
     def PossibleMoves(self,blocklist):
         '''every block may have possible moves
         so in order to make this list, go through each block
@@ -188,29 +202,36 @@ class Block:
 
 
 def test():
-   #function for testing Board creation and Block Add/Delete/Move
     b = Board(3,5)
     print("This is a test 3x5 Board called 'b'\n")
     print(b)
 
-    b.AddBlock(2,2,1,0,0)
+    b1= Block(2,2,0,0)
+    b.AddBlock(b1,1)
     print("Add a 2x2 test block called 1 to the top left corner of 'b'\n")
     print(b)
 
-    b.AddBlock(1,2,2,0,3)
+    b2 = Block(1,2,0,3)
+    b.AddBlock(b2,3)
     print("Add a 1x2 test block called 2 to the top right corner of 'b'\n")
     print(b)
 
     #print("Attempt to add a 1x1 test block called 3 to an already occupied spot\n")
-    #b.AddBlock(1,1,3,0,0)
+    #b3= Block(1,1,0,0)
+    #b.AddBlock(b3,3)
     #print(b)
 
     #print("Attempt to add a 1x1 test block called 4 to an out of bound spot\n")
-    #b.AddBlock(1,1,3,5,5)
+    #b4= Block(1,1,5,5)
+    #b.AddBlock(b4,4)
     #print(b)
 
+    
+    b.MoveBlock(b2,3,'down')
+    print(b)
 
-    return b
+    b.MoveBlock(b2,3,'left')
+    print(b)
 
 
 
