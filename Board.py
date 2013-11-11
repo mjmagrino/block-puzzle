@@ -39,12 +39,24 @@ class Board:
                 self.tray[i+row_pos][j+col_pos] = ID
     
     def DeleteBlock(self, block, ID):
-          for i in range(width):
-              for j in range(height):
-                  if int(self.tray[i+row_pos][j+col_pos]==ID
-                       self.tray[i+row_pos][j+col_pos]= 0
-    def MoveBlock(self,block,ID):
+        width=block.getWidth
+        height=block.getHeight
+        #ID=block.getID
+        row_pos=block.getPos[0]
+        col_pos=block.getPos[1]
+          
+        for i in range(width):
+            for j in range(height):
+                if int(self.tray[i+row_pos][j+col_pos]==ID:
+                    self.tray[i+row_pos][j+col_pos]= 0
+    
+     def MoveBlock(self,block,ID,new_row,new_col):
+          new_spot = Block(block.getWidth, block.getHeight, new_row, new_col)
           DeleteBlock(block, ID)
+          
+          AddBlock(
+                     
+
           
     def PossibleMoves(self,blocklist):
         '''every block may have possible moves
