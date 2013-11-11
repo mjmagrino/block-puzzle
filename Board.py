@@ -25,7 +25,7 @@ class Board:
           
     def AddBlock(self,block):
         width=int(block.getWidth())
-        height=int(stryblock.getHeight())
+        height=int(block.getHeight()
         ID=block.getID()
         row_pos=int(block.getPos()[0])
         col_pos=int(block.getPos()[1])
@@ -210,6 +210,7 @@ class Block:
 
     def getWidth(self):
         return self._width
+    
     '''def __str__(self):
 	return ' Width: '+ str(self._width ) +\
 		' Height: '+str(self._height) +\
