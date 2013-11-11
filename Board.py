@@ -39,6 +39,8 @@ class Board:
                 self.tray[i+row_pos][j+col_pos] = ID
     
     def DeleteBlock(self, block, ID):
+        #this doesn't really 'delete' the Block object, it just removes it from the tray
+        #should be renamed to 'RemoveBlock()'...
         width=block.getWidth
         height=block.getHeight
         #ID=block.getID
@@ -53,6 +55,8 @@ class Board:
   
      def MoveBlock(self,block,ID,new_row,new_col):
           #this is really stupid and will wind up with a ton of extraneous memory usage
+          #it would be better to change the position information in the block rather than create
+          #a ton of new Block objects.
           new_spot = Block(block.getWidth, block.getHeight, new_row, new_col)
           DeleteBlock(block, ID)
           AddBlock(new_spot, ID)
