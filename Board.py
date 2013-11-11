@@ -185,3 +185,34 @@ class Block:
 
     def __repr__(self):
 	return self.__str__()'''
+
+
+def test():
+   #function for testing Board creation and Block Add/Delete/Move
+    b = Board(3,5)
+    print("This is a test 3x5 Board called 'b'\n")
+    print(b)
+
+    b.AddBlock(2,2,1,0,0)
+    print("Add a 2x2 test block called 1 to the top left corner of 'b'\n")
+    print(b)
+
+    b.AddBlock(1,2,2,0,3)
+    print("Add a 1x2 test block called 2 to the top right corner of 'b'\n")
+    print(b)
+
+    #print("Attempt to add a 1x1 test block called 3 to an already occupied spot\n")
+    #b.AddBlock(1,1,3,0,0)
+    #print(b)
+
+    #print("Attempt to add a 1x1 test block called 4 to an out of bound spot\n")
+    #b.AddBlock(1,1,3,5,5)
+    #print(b)
+
+
+    return b
+
+
+
+b= test()
+
