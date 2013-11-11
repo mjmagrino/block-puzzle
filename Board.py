@@ -37,7 +37,10 @@ class Board:
             for j in range(height):
                 self.tray[i+row_pos][j+col_pos] = ID
     
-    def DeleteBlock(self, block, ID):
+    
+    #RemoveBlock and MoveBlock are depreciated. Each new config will result in a new Board.
+    #This will be handled in Puzzle.py
+'''    def RemoveBlock(self, block, ID):
         #this doesn't really 'delete' the Block object, it just removes it from the tray
         #should be renamed to 'RemoveBlock()'...
         width=int(block.getWidth())
@@ -52,12 +55,13 @@ class Board:
                     self.tray[i+row_pos][j+col_pos]= 0
     
   
- '''   def MoveBlock(self,block,ID,direction):
+    def MoveBlock(self,block,ID,direction):
+         #intial thought: create temp block, delete old block, add temp block...
          #this is really stupid and will wind up with a ton of extraneous memory usage
          #it would be better to change the position information in the block rather than create
          #a ton of new Block objects.
        
-         # take direction as arg...must handle 4 cases
+         # alternate way: take direction as arg...must handle 4 cases
        	if direction == 'right':
         	block.setPos(block.getPos()[0],block.getPos()[1]+1)
        	elif direction == 'left':
@@ -227,11 +231,11 @@ def test():
     #print(b)
 
     
-    b.MoveBlock(b2,3,'down')
-    print(b)
+    #b.MoveBlock(b2,3,'down')
+    #print(b)
 
-    b.MoveBlock(b2,3,'left')
-    print(b)
+    #b.MoveBlock(b2,3,'left')
+    #print(b)
 
 
 
