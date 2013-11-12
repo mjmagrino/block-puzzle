@@ -1,6 +1,6 @@
 class Board:
 
-     _width = 0
+    _width = 0
     _height = 0
     def __init__(self, rows, cols ):
 
@@ -25,7 +25,7 @@ class Board:
           
     def AddBlock(self,block):
         width=int(block.getWidth())
-        height=int(block.getHeight()
+        height=int(block.getHeight())
         ID=block.getID()
         row_pos=int(block.getPos()[0])
         col_pos=int(block.getPos()[1])
@@ -82,7 +82,7 @@ class Board:
      
          
     
-    def PossibleMoves(self,blocklist):
+   def PossibleMoves(self,blocklist):
         '''every block may have possible moves
         so in order to make this list, go through each block
         on the board and find possible moves for it
@@ -186,7 +186,7 @@ class Block:
     _row_pos = 0
     _col_pos = 0
     
-    def __init__(self,height, width, row_pos,col_pos):
+    def __init__(self,height, width, row_pos,col_pos, ID):
 
 	self._width = int(width)
         self._height = int(height)
@@ -210,6 +210,10 @@ class Block:
 
     def getWidth(self):
         return self._width
+    
+    def getID(self):
+        return self._ID
+
     
     '''def __str__(self):
 	return ' Width: '+ str(self._width ) +\
