@@ -1,5 +1,5 @@
 import sys
-from Tray import *
+from Board import *
 
 
 hash_table = {}
