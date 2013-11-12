@@ -46,7 +46,7 @@ def main(argv):
 		for j in range(len(raw_blocks[1])):
         	if (raw_blocks[i][j] != ' '):
 	    	tmp.append(raw_blocks[i][j])
-    	b = Block(tmp[0],tmp[1],tmp[2],tmp[3])	    
+    	b = Block(tmp[0],tmp[1],tmp[2],tmp[3],i+1)	    
     	blocks.append(b)
 
 	board = MakeBoard(board_height, board_width, blocks)
