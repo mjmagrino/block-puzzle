@@ -16,13 +16,18 @@ class Board:
         self._height=rows
 
     def __str__(self):
-
+	#old code
+	'''
         tmp1= self.tray
         
         for row in tmp1:
             print(row)
         return ''
-          
+        '''
+        #I think that this is cleaner:
+        s='\n'.join([str(item) for item in self.tray])
+        return s+ '\n'
+        
     def AddBlock(self,block):
         width=int(block.getWidth())
         height=int(block.getHeight())
