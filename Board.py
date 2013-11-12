@@ -183,7 +183,8 @@ class Board:
         if count == w:
             return True
         return False 
-        
+
+#considering moving this class to its own file        
 class Block:
 
     _width = 0
@@ -229,7 +230,7 @@ class Block:
     def __repr__(self):
 	return self.__str__()'''
 
-
+#consider moving this to its own file, or deleteing it entirely
 def test():
     b = Board(3,3)
     #print("This is a test 3x3 Board called 'b'\n")
