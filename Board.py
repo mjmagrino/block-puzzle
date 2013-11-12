@@ -108,7 +108,7 @@ class Board:
         if canMoveLeft(block):
             moves.append("Left")
         if canMoveUp(block):
-            moves.apend("Up")
+            moves.append("Up")
         if canMoveDown(block):
             moves.append("Down")
         if canMoveRight(block):
