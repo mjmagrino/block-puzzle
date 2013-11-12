@@ -23,8 +23,8 @@ def HashConfig(blocks):
 
 
 def main(argv):
-	file1 = sys.argv[1]
-	file2 = sys.argv[2]
+	file1 = argv[1]
+	file2 = argv[2]
 
 	file1 = open(file1,'r')
 	file2 = open(file2, 'r')
