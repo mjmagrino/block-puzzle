@@ -58,6 +58,7 @@ def MakeBoard(height,width,blocks):
     board = Board(int(height),int(width))
     for x in range(len(blocks)):
         board.AddBlock(blocks[x])
+    return board
 
 def NewConfigs(boardlist,blocks):
     ret_list =[]
