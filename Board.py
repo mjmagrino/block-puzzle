@@ -50,11 +50,13 @@ class Board:
     
     def RemoveBlock(self, block):
         #this doesn't really 'delete' the Block object, it just removes it from the tray
-        width=int(block.getWidth())
-        height=int(block.getHeight())
+     	#most specific info about the block not currently needed
+        
+        #width=int(block.getWidth())
+        #height=int(block.getHeight())
         ID=block.getID()
-        row_pos=int(block.getPos()[0])
-        col_pos=int(block.getPos()[1])
+        #row_pos=int(block.getPos()[0])
+        #col_pos=int(block.getPos()[1])
           
         for i in range(width):
             for j in range(height):
@@ -230,7 +232,7 @@ class Block:
     def __repr__(self):
 	return self.__str__()'''
 
-#consider moving this to its own file, or deleteing it entirely
+#consider moving this function to its own file, or deleteing it entirely
 def test():
     b = Board(3,3)
     #print("This is a test 3x3 Board called 'b'\n")
