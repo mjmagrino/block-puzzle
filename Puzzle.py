@@ -19,6 +19,14 @@ def HashConfig(blocks):
     
     hash_table[key]= 'list of original configurations '+\
                         'of blocks, before being sorted'
+    if key in hash_table:
+        newlist = hash_table[key]
+    else:
+        newlist = []
+
+    newlist.append(blocks)
+
+    hash_table[key]= newlist
 
 
 
@@ -30,28 +38,41 @@ def main(argv):
 	file2 = open(file2, 'r')
 
 	lines = file1.readlines()
-	goal = file2.readlines()
+	goallines = file2.readlines()
 
 	file1.close()
 	file2.close()
 
 	tray_dimensions = lines[0]
-	board_height = tray_dimensions[0]
-	board_width = tray_dimensions[2]
+	board_height = int(tray_dimensions[0])
+	board_width = int(tray_dimensions[2])
 
 	raw_blocks = lines[1:]
 	blocks=[]
+	boardlist = []
+	
 	for i in range(len(raw_blocks)):
     	tmp=[]
-		for j in range(len(raw_blocks[1])):
+		for j in range(len(raw_blocks[i])):
         	if (raw_blocks[i][j] != ' '):
 	    	tmp.append(raw_blocks[i][j])
     	b = Block(tmp[0],tmp[1],tmp[2],tmp[3],i+1)	    
     	blocks.append(b)
 
-	board = MakeBoard(board_height, board_width, blocks)
-    print(board)
-    print(board.PossibleMoves(blocks))
+	boardlist.append(MakeBoard(board_height, board_width, blocks))
+    print(boardlist[0][0])
+    print(boardlist[0][0].PossibleMoves(blocks))
+
+    newlist=[]
+    for thing in boardslist:
+        for ID in thing[1]:
+            for move in thing[1][ID]:
+                newlist.append(MakeNewBoard(thing[0],blocks,ID,move))
+    print('\n')
+    for board in newlist:
+        print(board[0])
+        print(board[0].PossibleMoves(board[2]))
+        print('\n')
 
 
 def MakeBoard(height,width,blocks):
@@ -100,11 +121,28 @@ def MakeNewBoard(board, blocks,ID,move):
     NewBoard = MakeBoard(board._height,board._width,blocklist)
 
 
+#assumes single block goal
 def GoalCheck(Board, goal):
+    '''single line goal'''
     for block in Board:
         if block.isGoal(goal):
             return True         #that's it you're done
-        
+
+
+#allows for goal cases for multiple blocks
+#requires parsing of goal file
+def checkGoal(Board,goal):
+    '''Assuming that goal is a list'''
+    goals= len(goals)
+    count = 0
+    for goalblock in goal:
+        for block in Board:
+            if block.isGoal(goalblock):
+                count +=1
+    if count == goals:
+        return True
+    else:
+        return False
 
 
 #the following tests the RemoveBlock() method by removing the first block added to the board
