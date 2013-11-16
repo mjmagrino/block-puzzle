@@ -158,6 +158,9 @@ def MakeNewBoard(board,ID,move):
     "OldBlock.getID(): " + str(OldBlock.getID()))
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n")
 
+
+    #This is where things get wonky...and why passing OldBlock.getID() to NewBlock fails...
+    print("~~~~~~~~~~~OldBlock.getID(): " + str(OldBlock.getID()))
     OldID = str(OldBlock.getID)
     print("~~~~~~~OldID: " + str(OldID) +"\n")
         
