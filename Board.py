@@ -70,29 +70,6 @@ class Board:
 		#removes the block from the BlockList
         self.BlockList.remove(block)
                         
-                    
- 
-    # MoveBlock is depreciated. Each new config will result in a new Board.
-    #This will be handled in Puzzle.py   
-'''  
-    def MoveBlock(self,block,ID,direction):
-         #intial thought: create temp block, delete old block, add temp block...
-         #this is really stupid and will wind up with a ton of extraneous memory usage
-         #it would be better to change the position information in the block rather than create
-         #a ton of new Block objects.
-       
-         # alternate way: take direction as arg...must handle 4 cases
-       	if direction == 'right':
-        	block.setPos(block.getPos()[0],block.getPos()[1]+1)
-       	elif direction == 'left':
-       		block.setPos(block.getPos()[0],block.getPos()[1]-1)
-       	elif direction == 'up':
-        	block.setPos(block.getPos()[0]-1,block.getPos()[1])
-        elif direction == 'down':
-        	block.setPos(block.getPos()[0]+1,block.getPos()[1])
-        else:
-        	raise Exception("MoveBlock failed!")
-'''
        
    def getBlockList():
         return self.BlockList()	
