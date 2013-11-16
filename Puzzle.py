@@ -1,6 +1,6 @@
 import sys
 from Board import *
-
+from Block import *
 
 hash_table = {}
 
