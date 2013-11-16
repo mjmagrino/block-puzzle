@@ -1,10 +1,12 @@
 class Board:
 
+
     _width = 0
     _height = 0
     BlockList = []
     
     def __init__(self, rows, cols ):
+
 
         matrix = []
         
@@ -18,8 +20,8 @@ class Board:
         self._height=rows
 
     def __str__(self):
-	#old code
-	'''
+        #old code
+        '''
         tmp1= self.tray
         
         for row in tmp1:
@@ -29,7 +31,10 @@ class Board:
         #I think that this is cleaner:
         s='\n'.join([str(item) for item in self.tray])
         return s+ '\n'
-        
+
+    def __repr__(self):
+        return self.__str__()
+    
     def AddBlock(self,block):
         width=int(block.getWidth())
         height=int(block.getHeight())
@@ -48,63 +53,62 @@ class Board:
             for j in range(height):
                 self.tray[j+row_pos][i+col_pos] = ID
     
-    	#adds the block to the BlockList
-        	self.BlockList.append(block)
+        #adds the block to the BlockList
+        self.BlockList.append(block)
     
     def RemoveBlock(self, block):
         #this doesn't really 'delete' the Block object, it just removes it from the tray
-     	#most specific info about the block not currently needed
+             #most specific info about the block not currently needed
         
         #width=int(block.getWidth())
         #height=int(block.getHeight())
         ID=block.getID()
         #row_pos=int(block.getPos()[0])
         #col_pos=int(block.getPos()[1])
-        
-        #sets all locations of the block ID in the tray to 0
+          
         for i in range(width):
             for j in range(height):
                 if int(self.tray[j+row_pos][i+col_pos]==ID):
                     self.tray[j+row_pos][i+col_pos]= 0
-		
-		#removes the block from the BlockList
+
+        #removes the block from the BlockList
         self.BlockList.remove(block)
-                        
-       
-   def getBlockList():
-        return self.BlockList()	
-         
     
-   def PossibleMoves(self,blocklist):
+    def getBlockList(self):
+        return self.BlockList
+         
+    def PossibleMoves(self):
         '''every block may have possible moves
         so in order to make this list, go through each block
         on the board and find possible moves for it
 
+
         sum of moves for each block
         '''
+        blocklist = self.getBlockList()
         allmoves={}
         for i in range(len(blocklist)):
-            allmoves[blocklist[i]] = PossibleBlockMoves(blocklist[i])
+            allmoves[blocklist[i]] = self.PossibleBlockMoves(blocklist[i])
         return allmoves
          
-
          
     def PossibleBlockMoves(self,block):
         '''is there space above it, right, left, below? '''
 
         moves=[]
-        if canMoveLeft(block):
+        if self.canMoveLeft(block):
             moves.append("Left")
-        if canMoveUp(block):
+        if self.canMoveUp(block):
             moves.append("Up")
-        if canMoveDown(block):
+        if self.canMoveDown(block):
             moves.append("Down")
-        if canMoveRight(block):
+        if self.canMoveRight(block):
             moves.append("Right")
                 
         return moves      
 
-    def canMoveLeft(self,block): 
+
+    def canMoveLeft(self,block):
 
         pos = block.getPos()
         i = int(pos[0])
@@ -156,6 +160,7 @@ class Board:
             return True
         return False
 
+
     def canMoveDown(self,block):
         pos = block.getPos()
         i = int(pos[0])
@@ -172,8 +177,10 @@ class Board:
             return True
         return False 
 
+
 #considering moving this class to its own file        
 class Block:
+
 
     _width = 0
     _height = 0
@@ -182,25 +189,32 @@ class Block:
     
     def __init__(self,height, width, row_pos,col_pos, ID):
 
-	self._width = int(width)
+
+        self._width = int(width)
         self._height = int(height)
         self._row_pos = int(row_pos)
         self._col_pos = int(col_pos)
-        self._ID = ID
+        self._ID = int(ID)
+
+
 
 
     def isequal(other):
   
         return (self._width == other._width) and (self._height == other._height)
 
+
     def getSize(self):
         return self.getHeight(),self.getWidth()
+
 
     def getPos(self):
         return self._row_pos,self._col_pos
 
+
     def getHeight(self):
         return self._height
+
 
     def getWidth(self):
         return self._width
@@ -208,50 +222,19 @@ class Block:
     def getID(self):
         return self._ID
 
+
     
     '''def __str__(self):
-	return ' Width: '+ str(self._width ) +\
-		' Height: '+str(self._height) +\
-		' Row_pos: '+str(self._row_pos) +\
-		' Col_pos: '+str(self._col_pos)+'\n'
-
+        return ' Width: '+ str(self._width ) +\
+                ' Height: '+str(self._height) +\
+                ' Row_pos: '+str(self._row_pos) +\
+                ' Col_pos: '+str(self._col_pos)+'\n'
+    '''
+    def __str__(self):
+        return str(self._ID)
+    
     def __repr__(self):
-	return self.__str__()'''
+        return self.__str__()
 
-#consider moving this function to its own file, or deleteing it entirely
-def test():
-    b = Board(3,3)
-    #print("This is a test 3x3 Board called 'b'\n")
-    print(b)
-
-    b1= Block(1,2,0,1,1)
-    b.AddBlock(b1)
-    #print("Add a 1x2 test block called 1\n")
-    print(b)
-
-    b2 = Block(1,1,2,0,2)
-    b.AddBlock(b2)
-    #print("Add a 1x1 test block called 2 \n")
-    print(b)
-
-    b3 = Block(1,2,2,1,3)
-    b.AddBlock(b3)
-    #print("Add a 1x2 test block called 3 \n")
-    print(b)
-
-    #print("Attempt to add a 1x1 test block called 3 to an already occupied spot\n")
-    #b3= Block(1,1,0,0)
-    #b.AddBlock(b3,3)
-    #print(b)
-
-    #print("Attempt to add a 1x1 test block called 4 to an out of bound spot\n")
-    #b4= Block(1,1,5,5)
-    #b.AddBlock(b4,4)
-    #print(b)
-
-
-    return b
-
-
-#b= test()
+    
 
