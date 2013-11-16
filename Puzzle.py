@@ -124,7 +124,7 @@ def MakeNewBoard(board,ID,move):
         "block: " + str(block) + "\n" +\
         "ID: " +str(ID) + "\n" +\
         "block.getID(): " +str(block.getID()))
-
+        
         if str(block.getID())==str(ID):
             print("~~~~~hello from the OldBlock check! Success!~~~~~~\n\n") 
             OldBlock = block
@@ -134,7 +134,8 @@ def MakeNewBoard(board,ID,move):
             newblocklist.append(block)
         else:
             raise Exception("welp, this isn't working...\n")
-     
+        print("~~~~~~current state of newblocklist: " + str(newblocklist) + "\n")
+        
     if move == "Left":
         NewRowPos =OldBlock.getPos()[0]
         NewColPos =OldBlock.getPos()[1]-1
@@ -161,6 +162,7 @@ def MakeNewBoard(board,ID,move):
 
     NewBlock = Block(OldBlock.getHeight(), OldBlock.getWidth(), NewRowPos,NewColPos,OldBlock.getID())
     #NewBlock = OldBlock
+
     print("~~~~~~~~~~~~~~NewBlock properties~~~~~~~~~~~~~~~~~~ \n" +\
     "NewBlock.getHeight(): " + str(NewBlock.getHeight()) +"\n" +\
     "NewBlock.getWidth(): " + str(NewBlock.getWidth()) +"\n" +\
@@ -170,7 +172,7 @@ def MakeNewBoard(board,ID,move):
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n")
 
 
-    print("~~~~~~~~~~~~~MakeNewBoard() NewBlock print: " + str(NewBlock))
+    #print("~~~~~~~~~~~~~MakeNewBoard() NewBlock: " + str(NewBlock))
     newblocklist.append(NewBlock)
 
     print("~~~~~~~~~~~~~MakeNewBoard() newblocklist: \n")
