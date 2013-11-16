@@ -105,6 +105,8 @@ def NewConfigs(boardlist):
         print("~~~~~~~~~~~~~~~~~~~~~NewConfigs() board: " + "\n" + str(board))
         moves = board.PossibleMoves()
         print("~~~~~~~~~~~~~~~~~~~~~NewConfigs() moves: " + str(moves))
+
+        #this for loop is what is currently causing the crash
         for ID in moves:
             for move in moves[ID]:
                 ret_list.append(MakeNewBoard(board,ID,move))
