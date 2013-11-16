@@ -2,6 +2,8 @@ class Board:
 
     _width = 0
     _height = 0
+    BlockList = []
+    
     def __init__(self, rows, cols ):
 
         matrix = []
@@ -41,12 +43,13 @@ class Board:
                 if int (self.tray[j+row_pos][i+col_pos]) !=0:
                     raise Exception('Block ' +str(ID) +' cannot be added at: ', i+row_pos,j+col_pos)
 
-        #adds the block
+        #sets the block ID to appear in the proper location in the tray
         for i in range(width):
             for j in range(height):
                 self.tray[j+row_pos][i+col_pos] = ID
     
-    
+    	#adds the block to the BlockList
+        	self.BlockList.append(block)
     
     def RemoveBlock(self, block):
         #this doesn't really 'delete' the Block object, it just removes it from the tray
@@ -57,11 +60,17 @@ class Board:
         ID=block.getID()
         #row_pos=int(block.getPos()[0])
         #col_pos=int(block.getPos()[1])
-          
+        
+        #sets all locations of the block ID in the tray to 0
         for i in range(width):
             for j in range(height):
                 if int(self.tray[j+row_pos][i+col_pos]==ID):
                     self.tray[j+row_pos][i+col_pos]= 0
+		
+		#removes the block from the BlockList
+        self.BlockList.remove(block)
+                        
+                    
  
     # MoveBlock is depreciated. Each new config will result in a new Board.
     #This will be handled in Puzzle.py   
@@ -83,10 +92,10 @@ class Board:
         	block.setPos(block.getPos()[0]+1,block.getPos()[1])
         else:
         	raise Exception("MoveBlock failed!")
- '''
+'''
        
-    
-     
+   def getBlockList():
+        return self.BlockList()	
          
     
    def PossibleMoves(self,blocklist):
