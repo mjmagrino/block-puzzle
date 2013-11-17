@@ -95,6 +95,16 @@ def main(argv):
         #print(board)
         #print(board.PossibleMoves())
 
+
+    newnewlist = NewConfigs(newlist)
+    
+
+    print("~~~~new new boardlist~~~~~~~~~~~~~:\n")
+    print(newnewlist)
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") 
+
+
+
 def MakeBoard(height,width,blocks):
     board = Board(int(height),int(width))
     for x in range(len(blocks)):

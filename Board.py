@@ -137,7 +137,7 @@ class Board:
         w = int(block.getWidth())
         count = 0
         for a in range(h):
-            if j+1 <=self._width:
+            if j+1 <=self._width-1:
                 if int(self.tray[i+a][j+1]) == 0:
                     count +=1
         if count == h:
@@ -153,7 +153,8 @@ class Board:
         
         count = 0
         for a in range(w):
-            if i+1>=self._height:
+            #if i+1>=self._height:
+            if i-1 >=0:
                 #print("spot above " +str(block.getID()) +": "+ str((self.tray[i-1][a+j])))
                 if int(self.tray[i-1][a+j]) == 0:
                     count +=1
