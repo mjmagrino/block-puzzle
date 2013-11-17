@@ -99,26 +99,39 @@ def MakeBoard(height,width,blocks):
     return board
     
 def NewConfigs(boardlist):
+    print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NewConfigs() starts~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     ret_list =[]
     
     for board in boardlist:
-        print("~~~~~~~~~~~~~~~~~~~~~NewConfigs() board: " + "\n" + str(board))
+        print("~~~~~~~~~~~~~~~~~~~~~1st for loop NewConfigs() board: " + "\n" + str(board))
         moves = board.PossibleMoves()
+        print("~~~~~~~~~~~~~~~~~~~~~NewConfigs() board.getBlockList(): " + str(board.getBlockList()))
         print("~~~~~~~~~~~~~~~~~~~~~NewConfigs() moves: " + str(moves))
-
+        
         #this for loop is what is currently causing the crash
         for ID in moves:
+            print("~~~~~~~~~~~~~~~~~~~~~ 2nd for loop NewConfigs() board: " + "\n" + str(board))
+            print("~~~~~~~~~~~~~~~~~~~~~NewConfigs() board.getBlockList(): " + str(board.getBlockList()))
+            print("~~~~~~~~~~~~~~~~NewConfigs() ID: " +str(ID) + "\n")
+            print("~~~~~~~~~~~~~~~~NewConfigs() moves[ID]: " +str(moves[ID]) + "\n")
             for move in moves[ID]:
+                print("~~~~~~~~~~~~~~~~~~~~~3rd for loop NewConfigs() board: " + "\n" + str(board))
+                print("~~~~~~~~~~~~~~~~~~~~~NewConfigs() board.getBlockList(): " + str(board.getBlockList()))
+                print("~~~~~~~~~~~~~~~~NewConfigs() move: " +str(move) + "\n")
                 ret_list.append(MakeNewBoard(board,ID,move))
+    print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NewConfigs() finishes!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     return ret_list
 
 
 def MakeNewBoard(board,ID,move):
-    print("\n~~~~~~~~~~~~~~~~~~MakeNewBoard() starts~~~~~~~~~~~~~~~~~~~\n")
+    print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MakeNewBoard() starts~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    #somewhere in the below code the BlockList of the board passed to this function is being directly added to
+    #this should not happen
     blocks = board.getBlockList()
     
     newblocklist=[]
-    print("~~~~~~~~~~~~~~~~~MakeNewBoard() blocks: " + str(blocks))
+    print("~~~~~~~~~~~~~~~~~ start of MakeNewBoard() blocks: " + str(blocks))
+    print("~~~~~~~~~~~~~~~~~ start of MakeNewBoard() board.getBlockList(): " + str(board.getBlockList()))
     print("~~~~~~~~~~~~~~~~~MakeNewBoard() ID: "+ str(ID) + "\n")
 
     for block in blocks:
@@ -180,10 +193,19 @@ def MakeNewBoard(board,ID,move):
     print("~~~~~~~~~~~~~MakeNewBoard() newblocklist: \n")
     print(str(newblocklist) + "\n")  
 
-    #call initial MakeBoard function
-    NewBoard = MakeBoard(board._height,board._width,newblocklist)
+    #call initial MakeBoard function...assuming this is where the first board's blocklist is double added to
+    height = board._height
+    width = board._width
 
-    print("\n~~~~~~~~~~~~~~~~~~MakeNewBoard() finishes!~~~~~~~~~~~~~~~~~~~\n")
+    #this works in creating a new Board
+    NewBoard = MakeBoard(height,width,newblocklist)
+
+    #as these print statements show, something unexpected is happening where the original BlockList is being modified
+    print("~~~~~~~~~~~~~~~~~ end of MakeNewBoard() blocks: " + str(blocks))
+    print("~~~~~~~~~~~~~~~~~ end of MakeNewBoard() board.getBlockList(): " + str(board.getBlockList()))
+
+    
+    print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MakeNewBoard() finishes!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     return NewBoard
     
 #assumes single block goal
