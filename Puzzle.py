@@ -83,6 +83,11 @@ def main(argv):
 
     newlist =NewConfigs(boardlist)
 
+
+    print("~~~~intial boardlist after NewConfigs~~~~~~~~~~:\n")
+    print(boardlist)
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")  
+
     print("~~~~new boardlist~~~~~~~~~~~~~:\n")
     print(newlist)
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") 
@@ -118,7 +123,8 @@ def NewConfigs(boardlist):
                 print("~~~~~~~~~~~~~~~~~~~~~3rd for loop NewConfigs() board: " + "\n" + str(board))
                 print("~~~~~~~~~~~~~~~~~~~~~NewConfigs() board.getBlockList(): " + str(board.getBlockList()))
                 print("~~~~~~~~~~~~~~~~NewConfigs() move: " +str(move) + "\n")
-                ret_list.append(MakeNewBoard(board,ID,move))
+                temp_board = MakeNewBoard(board,ID,move)
+                ret_list.append(temp_board)
     print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NewConfigs() finishes!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     return ret_list
 
@@ -197,6 +203,7 @@ def MakeNewBoard(board,ID,move):
     height = board._height
     width = board._width
 
+    print("~~~~~~~~~~~~~~~~~  MakeNewBoard() before creation of NewBoard board.getBlockList(): " + str(board.getBlockList()))
     #this works in creating a new Board
     NewBoard = MakeBoard(height,width,newblocklist)
 

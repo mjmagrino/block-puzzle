@@ -4,18 +4,18 @@ class Board:
 
     _width = 0
     _height = 0
-    BlockList = []
+    
     
     def __init__(self, rows, cols ):
 
-
+        self.BlockList = []
         matrix = []
         
      
         for i in range(int(rows)):
             other = [0] * cols
             matrix.append(other)
-
+    
         self.tray = matrix
         self._width=cols
         self._height=rows
@@ -30,7 +30,7 @@ class Board:
         return ''
         '''
         #I think that this is cleaner:
-        s='\n'.join([str(item) for item in self.tray])
+        s='\n' + '\n'.join([str(item) for item in self.tray])
         return s+ '\n'
 
     def __repr__(self):
