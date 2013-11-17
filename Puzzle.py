@@ -23,34 +23,46 @@ def SolutionNotFound(boardlist):
         return False
     else:
         return True
+
+
+def MakeHash(board):
+    file_block=""
+    ints =[] #a sorted list of integer representation of file_block
+    hash_val = ""
+    num_list= [] #a list of integer representation of file_block
+    config = ""
     
-
-
-def HashConfig(blocks):
-    ints =[]
-    key = ""
-    for block in blocks:
-        num=""
-        for i in range(len(block)):
-            num+= str(block[i])
-        ints.append(int(num))        
+    for block in board.getBlockList():
+        file_block=str(block.getHeight())+str(block.getWidth())+str(block.getPos()[0])+str(block.getPos()[1])
+        ints.append(int(file_block))
+        num_list.append(file_block)
     ints.sort()
     
-    for int in ints:
-        key += str(int)
+    for thing in ints:
+        hash_val += str(thing)
+    for thing in num_list:
+        config += str(thing)
     
-    hash_table[key]= 'list of original configurations '+\
-                        'of blocks, before being sorted'
-    if key in hash_table:
-        newlist = hash_table[key]
-    else:
-        newlist = []
+    return hash_val,config
 
 
-    newlist.append(blocks)
-
+def CheckForHash(boardlist):
+    flag = 0
+    for board in boardlist:
+        hashtuple = MakeHash(board)
+        if hashtuple[0] in hash_table:
+            newlist = hash_table[key]
+            if hashtuple[1] not in hash_table[key]:
+                newlist.append(hashtuple[1])
+            else:
+                break
+        else:
+            newlist = []
+            newlist.append(hashtuple[1])
 
     hash_table[key]= newlist
+
+    
 
 
 
@@ -98,6 +110,7 @@ def main(argv):
 
     #print("\n~~~~~~first MakeBoard attempt~~~~~\n")
     board = MakeBoard(board_height, board_width, blocks)
+    print("MakeHash(board): " + str(MakeHash(board)))
     boardlist.append(board)    
 
         #for board in boardlist:
@@ -114,9 +127,30 @@ def main(argv):
     
     x = 1
     while(SolutionNotFound(boardlist)):
+        for board in boardlist:
+            hashedboard = MakeHash(board)
+            key = hashedboard[0]
+            
+            if key in hash_table:
+                newlist = hash_table[key]
+                if hashedboard[1] not in hash_table[key]:
+                    newlist.append(hashedboard[1])
+                else:
+                    boardlist.remove(board)
+                    break
+            else:
+                newlist = []
+                newlist.append(hashedboard[1])
+            hash_table[key]= newlist
+            
+        if len(boardlist) == 0:
+            print("\nNo solution can be found\n")
+            sys.exit()
+            
         boardlist = NewConfigs(boardlist)
         print("Step Number " + str(x) + ": ")
         print("Number of boards in boardlist: " + str(len(boardlist)))
+
         x +=1
         
     #boardlist.append(NewConfigs(boardlist))
