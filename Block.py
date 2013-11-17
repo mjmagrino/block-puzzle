@@ -18,9 +18,9 @@ class Block:
 
 
 
-    def isequal(other):
+    def isequal(self,other):
   
-        return (self._width == other._width) and (self._height == other._height)
+        return (self._width == other._width) and (self._height == other._height) and (self.getPos() == other.getPos())
 
 
     def getSize(self):

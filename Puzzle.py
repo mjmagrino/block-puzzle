@@ -9,16 +9,21 @@ goals = []
 
 def SolutionNotFound(boardlist):
 
-    count = 0 
+    count = 0
+    tmplist = goals
     for board in boardlist:
-        for block in board.getBlockList():
-            for GoalBlock in goals:
+        tmp = board.getBlockList()
+        for block in tmp:
+            for GoalBlock in tmplist:
                 if block.isequal(GoalBlock):
-                    count += 1
-    if count != len(goals):
-        return True
-    else:
+                    count +=1
+                    tmplist.remove(GoalBlock)
+                    tmp.remove(block)
+    if count == len(goals):
         return False
+    else:
+        return True
+    
 
 
 def HashConfig(blocks):
@@ -105,11 +110,15 @@ def main(argv):
     print(boardlist)
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")  
 
-    x = 0
-    while(SolutionNotFound(boardlist):
+
+    
+    x = 1
+    while(SolutionNotFound(boardlist)):
         boardlist = NewConfigs(boardlist)
-        print(x)
-        x +=1 
+        print("Step Number " + str(x) + ": ")
+        print("Number of boards in boardlist: " + str(len(boardlist)))
+        x +=1
+        
     #boardlist.append(NewConfigs(boardlist))
     #newlist =NewConfigs(boardlist)
 
@@ -118,9 +127,9 @@ def main(argv):
     #print(boardlist)
     #print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")  
 
-    print("~~~~new boardlist~~~~~~~~~~~~~:\n")
-    print(len(boardlist))
-    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") 
+    #print("~~~~new boardlist~~~~~~~~~~~~~:\n")
+    #print(len(boardlist))
+    #print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") 
     #for board in newlist:
         #print(board)
         #print(board.PossibleMoves())
