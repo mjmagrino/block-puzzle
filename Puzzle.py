@@ -84,8 +84,8 @@ def main(argv):
     newlist =NewConfigs(boardlist)
 
 
-    print("~~~~intial boardlist after NewConfigs~~~~~~~~~~:\n")
-    print(boardlist)
+    #print("~~~~intial boardlist after NewConfigs~~~~~~~~~~:\n")
+    #print(boardlist)
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")  
 
     print("~~~~new boardlist~~~~~~~~~~~~~:\n")
