@@ -13,15 +13,14 @@ class Board:
         
      
         for i in xrange(int(rows)):
-            other = [0] * cols
-            matrix.append(other)
+            matrix.append([0] * cols)
     
         self.tray = matrix
         self._width=cols
         self._height=rows
 
     def __str__(self):
-        s='\n' + '\n'.join([str(item) for item in self.tray])
+        s=str(self._height) + ' ' + str(self._width) +'\n' + '\n'.join([str(item) for item in self.tray])
         return s+ '\n'
 
     def __repr__(self):
@@ -122,7 +121,6 @@ class Board:
     def canMoveUp(self,block, pos, i, j, h, w):
         count = 0
         for a in xrange(w):
-            #if i+1>=self._height:
             if i-1 >=0:
                 if int(self.tray[i-1][a+j]) == 0:
                     count +=1

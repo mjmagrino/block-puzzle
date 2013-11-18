@@ -17,7 +17,6 @@ class Block:
 
 
 
-
     def isequal(self,other):
   
         return (self._width == other._width) and (self._height == other._height) and (self.getPos() == other.getPos())
@@ -42,13 +41,6 @@ class Block:
         return self._ID
 
 
-    
-    '''def __str__(self):
-        return ' Width: '+ str(self._width ) +\
-                ' Height: '+str(self._height) +\
-                ' Row_pos: '+str(self._row_pos) +\
-                ' Col_pos: '+str(self._col_pos)+'\n'
-    '''
     def __str__(self):
         return str(self._ID)
     

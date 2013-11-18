@@ -10,7 +10,6 @@ goals = []
 
 def SolutionNotFound(boardlist):
 
-    
     tmplist = []
  
     for board in boardlist:
@@ -18,10 +17,7 @@ def SolutionNotFound(boardlist):
         for block in board.getBlockList():
             for GoalBlock in goals:
                 if block.isequal(GoalBlock):
-                    #print(board)
                     count +=1
-                    #tmplist.remove(GoalBlock)
-                    #tmp.remove(block)
         
         if count == len(goals):
             print(board)
@@ -110,20 +106,8 @@ def main(argv):
         goals.append(b)
 
     board = MakeBoard(board_height, board_width, blocks)
-    print("MakeHash(board): " + str(MakeHash(board)))
     boardlist.append(board)    
-
-        #for board in boardlist:
-            #print(board)
-            #print(board.PossibleMoves())
-    #print("~~~~intial blocks from file~~~:\n")
-    #print(blocks)
-    #print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")         
-    print("~~~~intial boardlist~~~~~~~~~~:\n")
-    print(boardlist)
-    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")  
-
-
+     
     
     x = 0
     while(SolutionNotFound(boardlist)):
@@ -149,9 +133,6 @@ def main(argv):
             sys.exit(1)
             
         boardlist = NewConfigs(boardlist)
-        print("Step Number " + str(x) + ": ")
-        #print("Number of boards in boardlist: " + str(len(boardlist)))
-        
 
     print("puzzle was solved in " +str(x)+ " moves")
 
@@ -160,19 +141,16 @@ def MakeBoard(height,width,blocks):
     board = Board(int(height),int(width))
     for x in xrange(len(blocks)):
         board.AddBlock(blocks[x])
-    #print("~~~~~~~~~~~~~~~~~~~ MakeBoard() board: " + "\n" + str(board))
     return board
     
 def NewConfigs(boardlist):
-
     ret_list =[]
     
     for board in boardlist:
         moves = board.PossibleMoves()
         for ID in moves:
             for move in moves[ID]:
-                temp_board = MakeNewBoard(board,ID,move)
-                ret_list.append(temp_board)
+                ret_list.append(MakeNewBoard(board,ID,move))
     return ret_list
 
 
@@ -181,17 +159,14 @@ def MakeNewBoard(board,ID,move):
     
     newblocklist=[]
 
-
     for block in blocks:
 
-        if str(block.getID())==str(ID):
-            OldBlock = block
-
-        elif str(block.getID())!=str(ID):
-
+        if str(block.getID())!=str(ID):
             newblocklist.append(block)
+        elif str(block.getID())==str(ID):
+            OldBlock = block      
         else:
-            raise Exception("welp, this isn't working...\n")
+            raise Exception("MakeNewBoard failed!")
     
         
     if move == "Left":
@@ -209,50 +184,14 @@ def MakeNewBoard(board,ID,move):
     else:
         raise Exception("MakeNewBoard failed!")
 
-
-    NewBlock = Block(OldBlock.getHeight(), OldBlock.getWidth(), NewRowPos,NewColPos,OldBlock.getID())
-
-
-    newblocklist.append(NewBlock)
+    newblocklist.append(Block(OldBlock.getHeight(), OldBlock.getWidth(), NewRowPos,NewColPos,OldBlock.getID()))
 
     #call initial MakeBoard function.
     height = board._height
     width = board._width
 
-    NewBoard = MakeBoard(height,width,newblocklist)
+    return MakeBoard(height,width,newblocklist)
 
-    
-    return NewBoard
-    
-#assumes single block goal
-#this is currently not being used
-def GoalCheck(Board, goal):
-    '''single line goal'''
-    for block in Board:
-        if block.isGoal(goal):
-            return True         #that's it you're done
-
-
-
-
-#allows for goal cases for multiple blocks
-#requires parsing of goal file
-#this is currently not being used
-def checkGoal(Board,goal):
-    '''Assuming that goal is a list'''
-    goals= len(goals)
-    count = 0
-    for goalblock in goal:
-        for block in Board:
-            if block.isGoal(goalblock):
-                count +=1
-    if count == goals:
-        return True
-    else:
-        return False
-
-
-#print(board)
 
 
 if __name__=="__main__":
