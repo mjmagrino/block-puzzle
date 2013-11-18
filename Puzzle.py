@@ -9,21 +9,28 @@ goals = []
 
 def SolutionNotFound(boardlist):
 
-    count = 0
-    tmplist = goals
+    
+    tmplist = []
+    #for block in goals:
+    #    tmplist.append(block)
+ 
     for board in boardlist:
-        tmp = board.getBlockList()
-        for block in tmp:
-            for GoalBlock in tmplist:
+        #tmp = []
+        count = 0
+        for block in board.getBlockList():
+            #tmp.append(block)
+        
+        #for block in tmp:
+            for GoalBlock in goals:
                 if block.isequal(GoalBlock):
+                    #print(board)
                     count +=1
-                    tmplist.remove(GoalBlock)
-                    tmp.remove(block)
-    if count == len(goals):
-        return False
-    else:
-        return True
-
+                    #tmplist.remove(GoalBlock)
+                    #tmp.remove(block)
+        
+        if count == len(goals):
+            return False
+    return True
 
 def MakeHash(board):
     file_block=""
@@ -42,7 +49,6 @@ def MakeHash(board):
         hash_val += str(thing)
     for thing in num_list:
         config += str(thing)
-    
     return hash_val,config
 
 
@@ -125,8 +131,9 @@ def main(argv):
 
 
     
-    x = 1
+    x = 0
     while(SolutionNotFound(boardlist)):
+        x +=1
         for board in boardlist:
             hashedboard = MakeHash(board)
             key = hashedboard[0]
@@ -145,14 +152,14 @@ def main(argv):
             
         if len(boardlist) == 0:
             print("\nNo solution can be found\n")
-            sys.exit()
+            sys.exit(1)
             
         boardlist = NewConfigs(boardlist)
         print("Step Number " + str(x) + ": ")
-        print("Number of boards in boardlist: " + str(len(boardlist)))
-
-        x +=1
+        #print("Number of boards in boardlist: " + str(len(boardlist)))
         
+
+    print("puzzle was solved in " +str(x)+ " moves")
     #boardlist.append(NewConfigs(boardlist))
     #newlist =NewConfigs(boardlist)
 
@@ -187,21 +194,9 @@ def NewConfigs(boardlist):
     ret_list =[]
     
     for board in boardlist:
-        #print("~~~~~~~~~~~~~~~~~~~~~1st for loop NewConfigs() board: " + "\n" + str(board))
         moves = board.PossibleMoves()
-        #print("~~~~~~~~~~~~~~~~~~~~~NewConfigs() board.getBlockList(): " + str(board.getBlockList()))
-        #print("~~~~~~~~~~~~~~~~~~~~~NewConfigs() moves: " + str(moves))
-        
-        #this for loop is what is currently causing the crash
         for ID in moves:
-            #print("~~~~~~~~~~~~~~~~~~~~~ 2nd for loop NewConfigs() board: " + "\n" + str(board))
-            #print("~~~~~~~~~~~~~~~~~~~~~NewConfigs() board.getBlockList(): " + str(board.getBlockList()))
-            #print("~~~~~~~~~~~~~~~~NewConfigs() ID: " +str(ID) + "\n")
-            #print("~~~~~~~~~~~~~~~~NewConfigs() moves[ID]: " +str(moves[ID]) + "\n")
             for move in moves[ID]:
-                #print("~~~~~~~~~~~~~~~~~~~~~3rd for loop NewConfigs() board: " + "\n" + str(board))
-                #print("~~~~~~~~~~~~~~~~~~~~~NewConfigs() board.getBlockList(): " + str(board.getBlockList()))
-                #print("~~~~~~~~~~~~~~~~NewConfigs() move: " +str(move) + "\n")
                 temp_board = MakeNewBoard(board,ID,move)
                 ret_list.append(temp_board)
     #print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NewConfigs() finishes!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
