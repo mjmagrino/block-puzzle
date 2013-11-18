@@ -2,6 +2,7 @@ import sys
 from Board import *
 from Block import *
 
+
 hash_table = {}
 
 
@@ -11,16 +12,10 @@ def SolutionNotFound(boardlist):
 
     
     tmplist = []
-    #for block in goals:
-    #    tmplist.append(block)
  
     for board in boardlist:
-        #tmp = []
         count = 0
         for block in board.getBlockList():
-            #tmp.append(block)
-        
-        #for block in tmp:
             for GoalBlock in goals:
                 if block.isequal(GoalBlock):
                     #print(board)
@@ -29,6 +24,7 @@ def SolutionNotFound(boardlist):
                     #tmp.remove(block)
         
         if count == len(goals):
+            print(board)
             return False
     return True
 
@@ -71,7 +67,6 @@ def CheckForHash(boardlist):
     
 
 
-
 def main(argv):
     file1 = argv[1]
     file2 = argv[2]
@@ -98,23 +93,22 @@ def main(argv):
     blocks=[]
     boardlist = []
         
-    for i in range(len(raw_blocks)):
+    for i in xrange(len(raw_blocks)):
         tmp=[]
-        for j in range(len(raw_blocks[i])):
+        for j in xrange(len(raw_blocks[i])):
             if (raw_blocks[i][j] != ' '):
                 tmp.append(raw_blocks[i][j])
         b = Block(tmp[0],tmp[1],tmp[2],tmp[3],i+1)            
         blocks.append(b)
 
-    for i in range(len(goallines)):
+    for i in xrange(len(goallines)):
         tmp=[]
-        for j in range(len(goallines[i])):
+        for j in xrange(len(goallines[i])):
             if (goallines[i][j] != ' '):
                 tmp.append(goallines[i][j])
         b = Block(tmp[0],tmp[1],tmp[2],tmp[3],i+1)            
         goals.append(b)
 
-    #print("\n~~~~~~first MakeBoard attempt~~~~~\n")
     board = MakeBoard(board_height, board_width, blocks)
     print("MakeHash(board): " + str(MakeHash(board)))
     boardlist.append(board)    
@@ -160,37 +154,17 @@ def main(argv):
         
 
     print("puzzle was solved in " +str(x)+ " moves")
-    #boardlist.append(NewConfigs(boardlist))
-    #newlist =NewConfigs(boardlist)
-
-
-    #print("~~~~intial boardlist after NewConfigs~~~~~~~~~~:\n")
-    #print(boardlist)
-    #print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")  
-
-    #print("~~~~new boardlist~~~~~~~~~~~~~:\n")
-    #print(len(boardlist))
-    #print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n") 
-    #for board in newlist:
-        #print(board)
-        #print(board.PossibleMoves())
-
-
-
-    
-
 
 
 def MakeBoard(height,width,blocks):
     board = Board(int(height),int(width))
-    for x in range(len(blocks)):
+    for x in xrange(len(blocks)):
         board.AddBlock(blocks[x])
-    #return board, board.PossibleMoves(blocks), blocks
     #print("~~~~~~~~~~~~~~~~~~~ MakeBoard() board: " + "\n" + str(board))
     return board
     
 def NewConfigs(boardlist):
-    #print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NewConfigs() starts~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+
     ret_list =[]
     
     for board in boardlist:
@@ -199,37 +173,26 @@ def NewConfigs(boardlist):
             for move in moves[ID]:
                 temp_board = MakeNewBoard(board,ID,move)
                 ret_list.append(temp_board)
-    #print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NewConfigs() finishes!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     return ret_list
 
 
 def MakeNewBoard(board,ID,move):
-    #print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MakeNewBoard() starts~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-    #somewhere in the below code the BlockList of the board passed to this function is being directly added to
-    #this should not happen
     blocks = board.getBlockList()
     
     newblocklist=[]
-    #print("~~~~~~~~~~~~~~~~~ start of MakeNewBoard() blocks: " + str(blocks))
-    #print("~~~~~~~~~~~~~~~~~ start of MakeNewBoard() board.getBlockList(): " + str(board.getBlockList()))
-    #print("~~~~~~~~~~~~~~~~~MakeNewBoard() ID: "+ str(ID) + "\n")
+
 
     for block in blocks:
-        #print("~~~~~~~~~~~~~~~~~~MakeNewBoard() block.getID() consistency check: " + "\n" +\
-        #"block: " + str(block) + "\n" +\
-        #"ID: " +str(ID) + "\n" +\
-        #"block.getID(): " +str(block.getID()))
-        
+
         if str(block.getID())==str(ID):
-            #print("~~~~~hello from the OldBlock check! Success!~~~~~~\n\n") 
             OldBlock = block
 
         elif str(block.getID())!=str(ID):
-            #print("~~~~~ entered elif block.getID()!=ID~~~~~~\n\n") 
+
             newblocklist.append(block)
         else:
             raise Exception("welp, this isn't working...\n")
-        #print("~~~~~~current state of newblocklist: " + str(newblocklist) + "\n")
+    
         
     if move == "Left":
         NewRowPos =OldBlock.getPos()[0]
@@ -246,48 +209,23 @@ def MakeNewBoard(board,ID,move):
     else:
         raise Exception("MakeNewBoard failed!")
 
-    #print("~~~~~~~~~~~~~~OldBlock properties~~~~~~~~~~~~~~~~~~ \n" +\
-    #"OldBlock.getHeight(): " + str(OldBlock.getHeight()) +"\n" +\
-    #"OldBlock.getWidth(): " + str(OldBlock.getWidth()) +"\n" +\
-    #"OldBlock.getPos()[0]: " + str(OldBlock.getPos()[0]) +"\n" +\
-    #"OldBlock.getPos()[1]: " + str(OldBlock.getPos()[1]) +"\n" +\
-    #"OldBlock.getID(): " + str(OldBlock.getID()))
-    #print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n")
-
 
     NewBlock = Block(OldBlock.getHeight(), OldBlock.getWidth(), NewRowPos,NewColPos,OldBlock.getID())
 
 
-    #print("~~~~~~~~~~~~~~NewBlock properties~~~~~~~~~~~~~~~~~~ \n" +\
-    #"NewBlock.getHeight(): " + str(NewBlock.getHeight()) +"\n" +\
-    #"NewBlock.getWidth(): " + str(NewBlock.getWidth()) +"\n" +\
-    #"NewBlock.getPos()[0]: " + str(NewBlock.getPos()[0]) +"\n" +\
-    #"NewBlock.getPos()[1]: " + str(NewBlock.getPos()[1]) +"\n" +\
-    #"NewBlock.getID(): " + str(NewBlock.getID()))
-    #print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n")
-
     newblocklist.append(NewBlock)
 
-    #print("~~~~~~~~~~~~~MakeNewBoard() newblocklist: \n")
-    #print(str(newblocklist) + "\n")  
-
-    #call initial MakeBoard function...assuming this is where the first board's blocklist is double added to
+    #call initial MakeBoard function.
     height = board._height
     width = board._width
 
-    #print("~~~~~~~~~~~~~~~~~  MakeNewBoard() before creation of NewBoard board.getBlockList(): " + str(board.getBlockList()))
-    #this works in creating a new Board
     NewBoard = MakeBoard(height,width,newblocklist)
 
     
-    #print("~~~~~~~~~~~~~~~~~ end of MakeNewBoard() blocks: " + str(blocks))
-    #print("~~~~~~~~~~~~~~~~~ end of MakeNewBoard() board.getBlockList(): " + str(board.getBlockList()))
-
-    
-    #print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MakeNewBoard() finishes!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     return NewBoard
     
 #assumes single block goal
+#this is currently not being used
 def GoalCheck(Board, goal):
     '''single line goal'''
     for block in Board:
@@ -299,6 +237,7 @@ def GoalCheck(Board, goal):
 
 #allows for goal cases for multiple blocks
 #requires parsing of goal file
+#this is currently not being used
 def checkGoal(Board,goal):
     '''Assuming that goal is a list'''
     goals= len(goals)
@@ -313,13 +252,7 @@ def checkGoal(Board,goal):
         return False
 
 
-
-
-#the following tests the RemoveBlock() method by removing the first block added to the board
-#board.RemoveBlock(blocks[0])
 #print(board)
-
-
 
 
 if __name__=="__main__":
